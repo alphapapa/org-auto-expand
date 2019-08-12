@@ -35,7 +35,7 @@ If you installed from MELPA, you're done.
 :END:
 
 1.  Define auto-expansion settings in an Org file (see below).
-2.  Run ~org-auto-expand~ to automatically set visibility accordingly.
+2.  Run ~org-auto-expand~ to set visibility accordingly.  You may do this automatically in a file with a file- or dir-local variable.  See examples.
 
 ** Auto-expansion Settings
 
@@ -88,7 +88,7 @@ After running ~org-auto-expand~, you would see:
 
 *** Variable =org-auto-expand-nodes=
 
-The variable =org-auto-expand-nodes= may be set as file-local or dir-local (e.g. using command ~add-file-local-variable~).  It should be an alist, the key of which should be an Org outline path (a list of heading strings corresponding to a node's hierarchy), and the value of which should be one of the values accepted by the =auto-expand= property.  The corresponding example:
+The variable =org-auto-expand-nodes= may be set as file-local or dir-local (e.g. using command ~add-file-local-variable~).  It should be an alist, the key of which should be an Org outline path (a list of heading strings corresponding to a node's hierarchy), and the value of which should be one of the values accepted by the =auto-expand= property.  The corresponding example, which also calls ~org-auto-expand~ automatically:
 
 #+BEGIN_SRC org
   # Local Variables:
