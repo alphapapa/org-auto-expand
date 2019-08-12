@@ -49,12 +49,6 @@
   "Name of property holding auto-expand setting."
   :type 'string)
 
-(defcustom org-auto-expand-collapse-all t
-  "Collapse all headings before auto-expanding.
-May be set in a file- or dir-local variable."
-  :type 'boolean
-  :safe #'booleanp)
-
 (defvar-local org-auto-expand-nodes nil
   "List defining how to expand outline nodes.
 Should be set in a file- or dir-local variable.
@@ -84,8 +78,6 @@ WHAT argument to the function `org-auto-expand-node'.")
 (defun org-auto-expand ()
   "Set current buffer's outline visibility accordingly."
   (interactive)
-  (when org-auto-expand-collapse-all
-    (org-overview))
   (when org-auto-expand-nodes
     (cl-loop for (olp . how) in org-auto-expand-nodes
              do (--when-let (org-find-olp olp 'this-buffer)
