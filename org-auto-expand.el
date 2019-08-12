@@ -80,6 +80,8 @@ WHAT argument to the function `org-auto-expand-node'.")
 If STARTUP is non-nil (interactively, with prefix), call
 `org-set-startup-visibility' first."
   (interactive "P")
+  (unless (derived-mode-p 'org-mode)
+    (user-error "Not an Org buffer: %s" (current-buffer)))
   (when startup
     (org-set-startup-visibility))
   (when org-auto-expand-nodes
