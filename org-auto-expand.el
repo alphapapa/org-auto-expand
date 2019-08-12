@@ -113,12 +113,10 @@ meaning to:
 If WHAT is a string, it is split on spaces and should be a list
 of the choices above."
   (setf what (cl-typecase what
-               (string (--> what
-                            (split-string it nil 'omit-nulls (rx (1+ space)))
-                            (--map (if (> (string-to-number it) 0)
-                                       (string-to-number it)
-                                     (intern it))
-                                   it)))
+               (string (--map (if (> (string-to-number it) 0)
+                                  (string-to-number it)
+                                (intern it))
+                              (split-string what nil 'omit-nulls (rx (1+ space)))))
                (list what)
                (number (list what))
                (symbol (list what))))
