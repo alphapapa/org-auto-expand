@@ -1,0 +1,129 @@
+#+TITLE: org-auto-expand
+
+#+PROPERTY: LOGGING nil
+
+# Note: This readme works with the org-make-toc <https://github.com/alphapapa/org-make-toc> package, which automatically updates the table of contents.
+
+[[https://melpa.org/#/org-auto-expand][file:https://melpa.org/packages/org-auto-expand-badge.svg]] [[https://stable.melpa.org/#/org-auto-expand][file:https://stable.melpa.org/packages/org-auto-expand-badge.svg]]
+
+This package automatically expands certain headings in an Org file depending on properties set, making it easy to always get the same initial view when finding a file.
+
+* Installation
+:PROPERTIES:
+:TOC:      0
+:END:
+
+** MELPA
+
+If you installed from MELPA, you're done.
+
+** Manual
+
+  Install these required packages:
+
+  + ~dash~
+
+  Then put this file in your ~load-path~, and put this in your init file:
+
+  #+BEGIN_SRC elisp
+  (require 'org-auto-expand)
+  #+END_SRC
+
+* Usage
+:PROPERTIES:
+:TOC:      0
+:END:
+
+1.  Define auto-expansion settings in an Org file (see below).
+2.  Run ~org-auto-expand~ to automatically set visibility accordingly.
+
+** Auto-expansion Settings
+
+Auto-expansion settings may be set in two ways: with Org properties on headings, and with the file- or dir-local variable ~org-auto-expand-nodes~.
+
+*** Properties
+
+Set the =auto-expand= property on a node to a list of one or more of these values:
+
+-  =heading=: Show just the heading.
+-  =body=: Show the heading and its body, but not its children.
+-  =children=: Show the heading's children, but not its body.
+-  A number =N=: Show child headings =N= levels deep.
+-  A symbol that =org-show-context= accepts as an argument.
+
+For example, in this Org file:
+
+#+BEGIN_SRC org
+  ,* Daily tasks
+  :PROPERTIES:
+  :auto-expand: body 1
+  :END:
+
+  Things to do every day.
+
+  ,** Check email
+  ,** Walk dog
+
+  ,* Weekly tasks
+
+  Things to do every week.
+
+  ,** Check tire pressure
+  ,** Attempt to walk cat
+#+END_SRC
+
+After running ~org-auto-expand~, you would see:
+
+#+BEGIN_EXAMPLE
+  ,* Daily tasks
+  :PROPERTIES:...
+
+  Things to do every day.
+
+  ,** Check email
+  ,** Walk dog
+
+  ,* Weekly tasks...
+#+END_EXAMPLE
+
+*** Variable =org-auto-expand-nodes=
+
+The variable =org-auto-expand-nodes= may be set as file-local or dir-local (e.g. using command ~add-file-local-variable~).  It should be an alist, the key of which should be an Org outline path (a list of heading strings corresponding to a node's hierarchy), and the value of which should be one of the values accepted by the =auto-expand= property.  The corresponding example:
+
+#+BEGIN_SRC org
+  # Local Variables:
+  # org-auto-expand-nodes: ((("Daily tasks") body 1))
+  # eval: (org-auto-expand)
+  # End:
+#+END_SRC
+
+* Changelog
+:PROPERTIES:
+:TOC:      0
+:END:
+
+** 0.1
+
+Initial release.
+
+* Development
+:PROPERTIES:
+:TOC:      ignore
+:END:
+
+Bug reports, feature requests, suggestions — /oh my/!
+
+* License
+:PROPERTIES:
+:TOC:      ignore
+:END:
+
+GPLv3
+
+# Local Variables:
+# eval: (require 'org-make-toc)
+# before-save-hook: org-make-toc
+# org-export-with-properties: ()
+# org-export-with-title: t
+# End:
+
