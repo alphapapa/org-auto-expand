@@ -37,6 +37,8 @@ If you installed from MELPA, you're done.
 1.  Define auto-expansion settings in an Org file (see below).
 2.  Run ~org-auto-expand~ to set visibility accordingly.  You may do this automatically in a file with a file- or dir-local variable.  See examples.
 
+You should also set the variable ~org-startup-folded~ as desired, or use the ~#+STARTUP~ keyword.
+
 ** Auto-expansion Settings
 
 Auto-expansion settings may be set in two ways: with Org properties on headings, and with the file- or dir-local variable ~org-auto-expand-nodes~.
