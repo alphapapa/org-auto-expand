@@ -13,9 +13,17 @@ This package automatically expands certain headings in an Org file depending on 
 :TOC:      0
 :END:
 
-** MELPA
+** Quelpa
 
-If you installed from MELPA, you're done.
+Installing with [[https://framagit.org/steckerhalter/quelpa][Quelpa]] is easy:
+
+1.  Install [[https://framagit.org/steckerhalter/quelpa-use-package#installation][quelpa-use-package]] (which can be installed directly from MELPA).
+2.  Add this form to your init file:
+
+#+BEGIN_SRC elisp
+  (use-package org-auto-expand
+    :quelpa (org-auto-expand :fetcher github :repo "alphapapa/org-auto-expand"))
+#+END_SRC
 
 ** Manual
 
@@ -23,7 +31,7 @@ If you installed from MELPA, you're done.
 
   + ~dash~
 
-  Then put this file in your ~load-path~, and put this in your init file:
+  Then put =org-auto-expand.el= in your ~load-path~, and put this in your init file:
 
   #+BEGIN_SRC elisp
   (require 'org-auto-expand)
