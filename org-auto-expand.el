@@ -75,9 +75,13 @@ WHAT argument to the function `org-auto-expand-node'.")
 ;;;; Commands
 
 ;;;###autoload
-(defun org-auto-expand ()
-  "Set current buffer's outline visibility accordingly."
-  (interactive)
+(defun org-auto-expand (&optional startup)
+  "Set current buffer's outline visibility accordingly.
+If STARTUP is non-nil (interactively, with prefix), call
+`org-set-startup-visibility' first."
+  (interactive "P")
+  (when startup
+    (org-set-startup-visibility))
   (when org-auto-expand-nodes
     (cl-loop for (olp . how) in org-auto-expand-nodes
              do (--when-let (org-find-olp olp 'this-buffer)
