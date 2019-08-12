@@ -59,18 +59,28 @@ WHAT argument to the function `org-auto-expand-node'.")
 
 ;;;; Mode
 
-;; TODO: Make minor mode work.
+;; We use a variable watcher to work around the fact that file-local variables
+;; are not yet bound until after all of the local variables have been processed,
+;; because that prevents them from being available in functions called by `eval'
+;; lines, like `org-auto-expand'.  This seems both messy and elegant.
 
-;; The mode would work except that file-local variables are defined
-;; after `org-mode-hook' is run, so e.g. `org-auto-expand-nodes' is
-;; always nil when `org-auto-expand' is called.
+;; TODO: Figure out if there's an alternative to a variable watcher.
 
-;; (define-minor-mode org-auto-expand-mode
-;;   "Automatically expand certain headings when `org-mode' is activated."
-;;   :global t
-;;   (if org-auto-expand-mode
-;;       (add-hook 'org-mode-hook #'org-auto-expand 'append)
-;;     (remove-hook 'org-mode-hook #'org-auto-expand)))
+(define-minor-mode org-auto-expand-mode
+  "Automatically expand certain headings when `org-mode' is activated."
+  :global t
+  (if org-auto-expand-mode
+      (add-variable-watcher 'org-auto-expand-nodes #'org-auto-expand-watcher)
+    (remove-variable-watcher 'org-auto-expand-nodes #'org-auto-expand-watcher)))
+
+(defun org-auto-expand-watcher (_symbol newval operation where)
+  "Call `org-auto-expand'.
+When OPERATION is `set', call `org-auto-expand' in buffer WHERE
+with `org-auto-expand-nodes' bound to NEWVAL."
+  (when (and newval where (eq operation 'set))
+    (with-current-buffer where
+      (let ((org-auto-expand-nodes newval))
+        (org-auto-expand)))))
 
 ;;;; Commands
 
