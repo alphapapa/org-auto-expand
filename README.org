@@ -4,7 +4,7 @@
 
 # Note: This readme works with the org-make-toc <https://github.com/alphapapa/org-make-toc> package, which automatically updates the table of contents.
 
-[[https://melpa.org/#/org-auto-expand][file:https://melpa.org/packages/org-auto-expand-badge.svg]] [[https://stable.melpa.org/#/org-auto-expand][file:https://stable.melpa.org/packages/org-auto-expand-badge.svg]]
+# [[https://melpa.org/#/org-auto-expand][file:https://melpa.org/packages/org-auto-expand-badge.svg]] [[https://stable.melpa.org/#/org-auto-expand][file:https://stable.melpa.org/packages/org-auto-expand-badge.svg]]
 
 This package automatically expands certain headings in an Org file depending on properties set, making it easy to always get the same initial view when finding a file.
 
@@ -27,11 +27,7 @@ Installing with [[https://framagit.org/steckerhalter/quelpa][Quelpa]] is easy:
 
 ** Manual
 
-  Install these required packages:
-
-  + ~dash~
-
-  Then put =org-auto-expand.el= in your ~load-path~, and put this in your init file:
+Put =org-auto-expand.el= in your ~load-path~, and put this in your init file:
 
   #+BEGIN_SRC elisp
   (require 'org-auto-expand)
