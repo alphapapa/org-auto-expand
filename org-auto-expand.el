@@ -5,7 +5,7 @@
 ;; Author: Adam Porter <adam@alphapapa.net>
 ;; URL: https://github.com/alphapapa/org-auto-expand
 ;; Version: 0.1-pre
-;; Package-Requires: ((emacs "25.1") (dash "2.12"))
+;; Package-Requires: ((emacs "26.1"))
 ;; Keywords: convenience, outlines, org
 
 ;;; License:
@@ -35,8 +35,7 @@
 
 (require 'cl-lib)
 (require 'org)
-
-(require 'dash)
+(require 'subr-x)
 
 ;;;; Customization
 
@@ -66,6 +65,7 @@ WHAT argument to the function `org-auto-expand-node'.")
 
 ;; TODO: Figure out if there's an alternative to a variable watcher.
 
+;;;###autoload
 (define-minor-mode org-auto-expand-mode
   "Automatically expand certain headings when `org-mode' is activated."
   :global t
@@ -96,8 +96,8 @@ If STARTUP is non-nil (interactively, with prefix), call
     (org-set-startup-visibility))
   (when org-auto-expand-nodes
     (cl-loop for (olp . how) in org-auto-expand-nodes
-             do (--when-let (org-find-olp olp 'this-buffer)
-                  (org-with-point-at it
+             do (when-let ((pos (org-find-olp olp 'this-buffer)))
+                  (org-with-point-at pos
                     (org-auto-expand-node how)))))
   (org-with-wide-buffer
    (goto-char (point-min))
@@ -125,21 +125,21 @@ meaning to:
 If WHAT is a string, it is split on spaces and should be a list
 of the choices above."
   (setf what (cl-typecase what
-               (string (--map (if (> (string-to-number it) 0)
-                                  (string-to-number it)
-                                (intern it))
-                              (split-string what nil 'omit-nulls (rx (1+ space)))))
+               (string (cl-loop for it in (split-string what nil 'omit-nulls (rx (1+ space)))
+                                collect (if (> (string-to-number it) 0)
+                                            (string-to-number it)
+                                          (intern it))))
                (list what)
                (number (list what))
                (symbol (list what))))
-  (--each what
-    (pcase it
+  (dolist (thing what)
+    (pcase thing
       ('heading (org-show-context 'minimal))
       ((or 'body)
        (org-show-context 'minimal)
        (org-cycle))
       ('children (org-show-children 1))
-      ((pred numberp) (org-show-children it))
+      ((pred numberp) (org-show-children thing))
       (else (org-show-context else)))))
 
 ;;;; Footer
