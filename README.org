@@ -6,12 +6,18 @@
 
 # [[https://melpa.org/#/org-auto-expand][file:https://melpa.org/packages/org-auto-expand-badge.svg]] [[https://stable.melpa.org/#/org-auto-expand][file:https://stable.melpa.org/packages/org-auto-expand-badge.svg]]
 
+[[https://melpa.org/#/org-auto-expand][file:https://melpa.org/packages/org-auto-expand-badge.svg]] [[https://stable.melpa.org/#/org-auto-expand][file:https://stable.melpa.org/packages/org-auto-expand-badge.svg]]
+
 This package automatically expands certain headings in an Org file depending on properties set, making it easy to always get the same initial view when finding a file.
 
 * Installation
 :PROPERTIES:
 :TOC:      0
 :END:
+
+** MELPA
+
+If you installed from [[https://melpa.org/#/org-auto-expand][MELPA]], you're already done!
 
 ** Quelpa
 
