@@ -1,6 +1,6 @@
 ;;; org-auto-expand.el --- Automatically expand certain headings  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019  Adam Porter
+;; Copyright (C) 2019-2023  Adam Porter
 
 ;; Author: Adam Porter <adam@alphapapa.net>
 ;; URL: https://github.com/alphapapa/org-auto-expand
