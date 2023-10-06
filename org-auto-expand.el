@@ -95,20 +95,25 @@ If STARTUP is non-nil (interactively, with prefix), call
   (interactive "P")
   (unless (derived-mode-p 'org-mode)
     (user-error "Not an Org buffer: %s" (current-buffer)))
-  (when startup
-    (org-cycle-set-startup-visibility))
-  (when org-auto-expand-nodes
-    (cl-loop for (olp . how) in org-auto-expand-nodes
-             do (when-let ((pos (org-find-olp olp 'this-buffer)))
-                  (org-with-point-at pos
-                    (org-auto-expand-node how)))))
-  (org-with-wide-buffer
-   (goto-char (point-min))
-   (let ((re (org-re-property org-auto-expand-property)))
-     (while (re-search-forward re nil t)
-       (save-excursion
-         (org-back-to-heading 'invisible-ok)
-         (org-auto-expand-node))))))
+  (let ((re (org-re-property org-auto-expand-property)))
+    ;; Do nothing unless we're going to do something.
+    (when (or org-auto-expand-nodes
+              (org-with-wide-buffer
+               (goto-char (point-min))
+               (re-search-forward re nil t)))
+      (when startup
+        (org-cycle-set-startup-visibility))
+      (when org-auto-expand-nodes
+        (cl-loop for (olp . how) in org-auto-expand-nodes
+                 do (when-let ((pos (org-find-olp olp 'this-buffer)))
+                      (org-with-point-at pos
+                        (org-auto-expand-node how)))))
+      (org-with-wide-buffer
+       (goto-char (point-min))
+       (while (re-search-forward re nil t)
+         (save-excursion
+           (org-back-to-heading 'invisible-ok)
+           (org-auto-expand-node)))))))
 
 ;;;; Functions
 
