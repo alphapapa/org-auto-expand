@@ -93,7 +93,7 @@ If STARTUP is non-nil (interactively, with prefix), call
   (unless (derived-mode-p 'org-mode)
     (user-error "Not an Org buffer: %s" (current-buffer)))
   (when startup
-    (org-set-startup-visibility))
+    (org-cycle-set-startup-visibility))
   (when org-auto-expand-nodes
     (cl-loop for (olp . how) in org-auto-expand-nodes
              do (when-let ((pos (org-find-olp olp 'this-buffer)))
@@ -134,13 +134,13 @@ of the choices above."
                (symbol (list what))))
   (dolist (thing what)
     (pcase thing
-      ('heading (org-show-context 'minimal))
+      ('heading (org-fold-show-context 'minimal))
       ((or 'body)
-       (org-show-context 'minimal)
+       (org-fold-show-context 'minimal)
        (org-cycle))
-      ('children (org-show-children 1))
-      ((pred numberp) (org-show-children thing))
-      (else (org-show-context else)))))
+      ('children (org-fold-show-children 1))
+      ((pred numberp) (org-fold-show-children thing))
+      (else (org-fold-show-context else)))))
 
 ;;;; Footer
 
