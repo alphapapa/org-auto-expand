@@ -5,7 +5,7 @@
 ;; Author: Adam Porter <adam@alphapapa.net>
 ;; URL: https://github.com/alphapapa/org-auto-expand
 ;; Version: 0.2-pre
-;; Package-Requires: ((emacs "26.1"))
+;; Package-Requires: ((emacs "26.1") (org "9.6"))
 ;; Keywords: convenience, outlines, org
 
 ;;; License:
