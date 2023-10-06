@@ -63,7 +63,7 @@ WHAT argument to the function `org-auto-expand-node'.")
 ;; because that prevents them from being available in functions called by `eval'
 ;; lines, like `org-auto-expand'.  This seems both messy and elegant.
 
-;; TODO: Figure out if there's an alternative to a variable watcher.
+;; TODO: Figure out if there's an alternative to a variable watcher (or just remove this and use the properties).
 
 ;;;###autoload
 (define-minor-mode org-auto-expand-mode
