@@ -88,11 +88,11 @@ with `org-auto-expand-nodes' bound to NEWVAL."
 ;;;; Commands
 
 ;;;###autoload
-(defun org-auto-expand (&optional startup)
+(defun org-auto-expand ()
   "Set current buffer's outline visibility accordingly.
-If STARTUP is non-nil (interactively, with prefix), call
+If `org-startup-folded' is non-nil, call
 `org-set-startup-visibility' first."
-  (interactive "P")
+  (interactive)
   (unless (derived-mode-p 'org-mode)
     (user-error "Not an Org buffer: %s" (current-buffer)))
   (let ((re (org-re-property org-auto-expand-property)))
@@ -101,7 +101,7 @@ If STARTUP is non-nil (interactively, with prefix), call
               (org-with-wide-buffer
                (goto-char (point-min))
                (re-search-forward re nil t)))
-      (when startup
+      (when org-startup-folded
         (org-cycle-set-startup-visibility))
       (when org-auto-expand-nodes
         (cl-loop for (olp . how) in org-auto-expand-nodes

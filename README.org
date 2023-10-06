@@ -48,8 +48,7 @@ Put =org-auto-expand.el= in your ~load-path~, and put this in your init file:
 2.  Run ~org-auto-expand~ to set visibility accordingly.  You may do this automatically in a file with a file- or dir-local variable.  See examples.
 
 +  The global minor mode ~org-auto-expand-mode~ automatically applies expansion settings when visiting Org files.
-+  To start with all entries folded, set the variable ~org-startup-folded~ as desired, or use the ~#+STARTUP~ keyword.  
-+  To reset to startup visibility before expanding entries, call ~org-auto-expand~ with a prefix argument.  This is especially useful when expanding on-demand rather than at file-visit time.
++  To start with all entries folded, set the variable ~org-startup-folded~ as desired, or use the ~#+STARTUP~ keyword (see Org manual).
 
 ** Auto-expansion Settings
 
