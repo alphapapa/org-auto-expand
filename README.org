@@ -122,6 +122,7 @@ Org version 9.6 or later is now required.
 
 *Fixes*
 
++ Mode ~org-auto-expand-mode~ adds ~org-auto-expand~ to ~org-mode-hook~.
 + Call ~org-back-to-heading~ with ~INVISIBLE-OK~ argument.  (Necessary with some newer Org versions.)
 
 ** 0.1

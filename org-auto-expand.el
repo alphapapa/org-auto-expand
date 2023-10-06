@@ -70,7 +70,10 @@ WHAT argument to the function `org-auto-expand-node'.")
   "Automatically expand certain headings when `org-mode' is activated."
   :global t
   (if org-auto-expand-mode
-      (add-variable-watcher 'org-auto-expand-nodes #'org-auto-expand-watcher)
+      (progn
+        (add-hook 'org-mode-hook #'org-auto-expand)
+        (add-variable-watcher 'org-auto-expand-nodes #'org-auto-expand-watcher))
+    (remove-hook 'org-mode-hook #'org-auto-expand)
     (remove-variable-watcher 'org-auto-expand-nodes #'org-auto-expand-watcher)))
 
 (defun org-auto-expand-watcher (_symbol newval operation where)
