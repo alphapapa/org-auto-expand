@@ -104,7 +104,7 @@ If STARTUP is non-nil (interactively, with prefix), call
    (let ((re (org-re-property org-auto-expand-property)))
      (while (re-search-forward re nil t)
        (save-excursion
-         (org-back-to-heading)
+         (org-back-to-heading 'invisible-ok)
          (org-auto-expand-node))))))
 
 ;;;; Functions

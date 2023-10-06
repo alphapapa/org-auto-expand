@@ -118,7 +118,9 @@ The variable =org-auto-expand-nodes= may be set as file-local or dir-local (e.g.
 
 ** 0.2-pre
 
-Nothing new yet.
+*Fixes*
+
++ Call ~org-back-to-heading~ with ~INVISIBLE-OK~ argument.  (Necessary with some newer Org versions.)
 
 ** 0.1
 
