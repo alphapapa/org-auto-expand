@@ -116,6 +116,10 @@ The variable =org-auto-expand-nodes= may be set as file-local or dir-local (e.g.
 :TOC:      0
 :END:
 
+** 0.2-pre
+
+Nothing new yet.
+
 ** 0.1
 
 Initial release.
